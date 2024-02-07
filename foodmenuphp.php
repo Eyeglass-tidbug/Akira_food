@@ -13,6 +13,27 @@
 		}
 		View2($conn, $fnd);
 	}
+	//select
+	elseif(isset($_POST["Select"])){
+		$id = $_POST["Select"];
+		$fnd = $_POST["foodtype"];
+		$price = $_POST["selectedPrice"];
+		//find food
+		$cal = selectres($conn, $fnd, $id);
+
+		if(!empty($cal)){
+			//cal total
+			cart($cal, $price);
+		}
+		else{
+			header("location:foodcart.php?eror=error");
+			exit();
+		}
+	}
+	elseif(isset($_POST["Cart"])){
+		header("location:foodcart.php?eror=error");
+		exit();
+	}
 	elseif(isset($_POST["Clear"])){
 		clear2();
 	}
